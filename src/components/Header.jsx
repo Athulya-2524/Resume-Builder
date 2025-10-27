@@ -27,7 +27,7 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to={'/'} className='text-light text-decoration-none'>rBuilder</Link>
           </Typography>
-          <Tooltip title={projectInfo}><Button color="inherit">Login</Button></Tooltip>
+          <Tooltip title={projectInfo}><Button color="inherit fw-bolder">Login</Button></Tooltip>
         </Toolbar>
       </AppBar>
     </Box>

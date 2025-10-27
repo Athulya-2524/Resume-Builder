@@ -5,8 +5,8 @@ import ResumeGenerator from './pages/ResumeGenerator'
 import UserForm from './pages/UserForm'
 import History from './pages/History'
 import Pnf from './pages/Pnf'
-import Header from './pages/Header'
-import Footer from './pages/Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 
 function App() {
