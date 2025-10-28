@@ -15,7 +15,7 @@ function ResumeGenerator() {
                     <p>Add pre-written examples to each section</p>
                     <h5>Step 1</h5>
                 </div>
-                <div className="col-md-2"></div>
+                <div className="col-md-1"></div>
                 <div className="col-md-4 border rounded shadow p-5 text-center">
                     <MdDownload className='text-primary fs-1 mb-3'/>
                     <h4>Download your Resume</h4>
@@ -30,5 +30,5 @@ function ResumeGenerator() {
         </div>
     )
 }
-
+ 
 export default ResumeGenerator
