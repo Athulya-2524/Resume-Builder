@@ -151,9 +151,9 @@ function UseInputs() {
         )
         case 5 : return (
             <div>
-                <h3>Professional Summary</h3>
+                <h3>Summary</h3>
                 <div className="p-3 row">
-                    <TextField id="standard-basic-summary" label="Write a short summary of yourself" variant="standard" multiline rows={4} defaultValue={'Passionate and detail-oriented Web Developer with a strong foundation in front-end and back-end development. Skilled in building responsive, user-friendly websites and dynamic web applications using HTML, CSS, JavaScript, React, and modern frameworks. Adept at problem-solving, debugging, and implementing clean, efficient code. Committed to continuous learning and delivering high-quality digital experiences that align with user needs and business goals.'} />
+                    <TextField onChange={e=>setResumeDetails({...resumeDetails,summary:e.target.value})} id="standard-basic-summary" label="Write a short summary of yourself" variant="standard" multiline rows={4} defaultValue={'Passionate and detail-oriented Web Developer with a strong foundation in front-end and back-end development. Skilled in building responsive, user-friendly websites and dynamic web applications using HTML, CSS, JavaScript, React, and modern frameworks. Adept at problem-solving, debugging, and implementing clean, efficient code. Committed to continuous learning and delivering high-quality digital experiences that align with user needs and business goals.'} />
                 </div>
             </div>
         )
