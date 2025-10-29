@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { FaXmark } from "react-icons/fa6";
+import { resume } from 'react-dom/server';
 
 const steps = ['Basic Informations', 'Contact Details', 'Education Details','Work Experience','Skills & Certifications','Review & Submit'];
 
@@ -15,6 +16,30 @@ function UseInputs() {
     const skillSuggestionArray = ['NODE JS','MONGODB','EXPRESS JS','REACT','ANGULAR','HTML','CSS','COMMUNICATION']
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    // create state for storing resume details
+    const [resumeDetails,setResumeDetails] = React.useState({
+      usename:"",
+      jobTitle:"",
+      location:"",
+      email:"",
+      mobile:"",
+      github:"",
+      linkedin:"",
+      portfolio:"",
+      course:"",
+      college:"",
+      university:"",
+      passoutYear:"",
+      jobType:"",
+      company:"",
+      cLocation:"",
+      duration:"",
+      userSkilss:[],
+      summary:""
+    })
+
+    console.log(resumeDetails);
+    
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -64,9 +89,9 @@ function UseInputs() {
             <div>
                 <h3>Personal Details</h3>
                 <div className="d-flex row p-3">
-                    <TextField id="standard-basic-name" label="Full Name" variant="standard" />
-                    <TextField id="standard-basic-job" label="Job Title" variant="standard" />
-                    <TextField id="standard-basic-location" label="Location" variant="standard" />
+                    <TextField value={resumeDetails.username} onChange={e=>setResumeDetails({...resumeDetails,username:e.target.value})} id="standard-basic-name" label="Full Name" variant="standard" />
+                    <TextField value={resumeDetails.jobTitle} onChange={e=>setResumeDetails({...resumeDetails,jobTitle:e.target.value})} id="standard-basic-job" label="Job Title" variant="standard" />
+                    <TextField value={resumeDetails.location} onChange={e=>setResumeDetails({...resumeDetails,location:e.target.value})} id="standard-basic-location" label="Location" variant="standard" />
                 </div>
             </div>
         )
@@ -74,11 +99,11 @@ function UseInputs() {
             <div>
                 <h3>Contact Details</h3>
                 <div className="d-flex row p-3">
-                    <TextField id="standard-basic-mail" label="Email" variant="standard" />
-                    <TextField id="standard-basic-phone" label="Phone Number" variant="standard" />
-                    <TextField id="standard-basic-github" label="Github Profile Link" variant="standard" />
-                    <TextField id="standard-basic-linkedin" label="LinkedIn Profile Link" variant="standard" />
-                    <TextField id="standard-basic-portfolio" label="Portfolio Link" variant="standard" />
+                    <TextField value={resumeDetails.email} onChange={e=>setResumeDetails({...resumeDetails,email:e.target.value})} id="standard-basic-mail" label="Email" variant="standard" />
+                    <TextField value={resumeDetails.mobile} onChange={e=>setResumeDetails({...resumeDetails,mobile:e.target.value})} id="standard-basic-phone" label="Phone Number" variant="standard" />
+                    <TextField value={resumeDetails.github} onChange={e=>setResumeDetails({...resumeDetails,github:e.target.value})} id="standard-basic-github" label="Github Profile Link" variant="standard" />
+                    <TextField value={resumeDetails.linkedin} onChange={e=>setResumeDetails({...resumeDetails,linkedin:e.target.value})} id="standard-basic-linkedin" label="LinkedIn Profile Link" variant="standard" />
+                    <TextField value={resumeDetails.portfolio} onChange={e=>setResumeDetails({...resumeDetails,portfolio:e.target.value})} id="standard-basic-portfolio" label="Portfolio Link" variant="standard" />
                 </div>
             </div>
         )
@@ -86,10 +111,10 @@ function UseInputs() {
             <div>
                 <h3>Education Details</h3>
                 <div className="d-flex row p-3">
-                    <TextField id="standard-basic-course" label="Course Name" variant="standard" />
-                    <TextField id="standard-basic-college" label="College Name" variant="standard" />
-                    <TextField id="standard-basic-university" label="University" variant="standard" />
-                    <TextField id="standard-basic-passout" label="Year of Passout" variant="standard" />
+                    <TextField value={resumeDetails.course} onChange={e=>setResumeDetails({...resumeDetails,course:e.target.value})} id="standard-basic-course" label="Course Name" variant="standard" />
+                    <TextField value={resumeDetails.college} onChange={e=>setResumeDetails({...resumeDetails,college:e.target.value})} id="standard-basic-college" label="College Name" variant="standard" />
+                    <TextField value={resumeDetails.university} onChange={e=>setResumeDetails({...resumeDetails,university:e.target.value})} id="standard-basic-university" label="University" variant="standard" />
+                    <TextField value={resumeDetails.passoutYear} onChange={e=>setResumeDetails({...resumeDetails,passoutYear:e.target.value})} id="standard-basic-passout" label="Year of Passout" variant="standard" />
                 </div>
             </div>
         )
@@ -97,10 +122,10 @@ function UseInputs() {
             <div>
                 <h3>Professional Details</h3>
                 <div className="d-flex row p-3">
-                    <TextField id="standard-basic-intern" label="Job or Internship" variant="standard" />
-                    <TextField id="standard-basic-company" label="Company Name" variant="standard" />
-                    <TextField id="standard-basic-loc" label="Company Location" variant="standard" />
-                    <TextField id="standard-basic-duration" label="Duration" variant="standard" />
+                    <TextField value={resumeDetails.jobType} onChange={e=>setResumeDetails({...resumeDetails,jobType:e.target.value})} id="standard-basic-intern" label="Job or Internship" variant="standard" />
+                    <TextField value={resumeDetails.company} onChange={e=>setResumeDetails({...resumeDetails,company:e.target.value})} id="standard-basic-company" label="Company Name" variant="standard" />
+                    <TextField value={resumeDetails.cLocation} onChange={e=>setResumeDetails({...resumeDetails,cLocation:e.target.value})} id="standard-basic-loc" label="Company Location" variant="standard" />
+                    <TextField value={resumeDetails.duration} onChange={e=>setResumeDetails({...resumeDetails,duration:e.target.value})} id="standard-basic-duration" label="Duration" variant="standard" />
                 </div>
             </div>
         )
