@@ -12,7 +12,7 @@ import { resume } from 'react-dom/server';
 
 const steps = ['Basic Informations', 'Contact Details', 'Education Details','Work Experience','Skills & Certifications','Review & Submit'];
 
-function UseInputs() {
+function UserInputs() {
     const skillSuggestionArray = ['NODE JS','MONGODB','EXPRESS JS','REACT','ANGULAR','HTML','CSS','COMMUNICATION']
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
@@ -34,9 +34,13 @@ function UseInputs() {
       company:"",
       cLocation:"",
       duration:"",
-      userSkilss:[],
+      userSkills:[],
       summary:""
     })
+
+    // reference to skill input tag
+    const skillRef = React.useRef()
+
 
     console.log(resumeDetails);
     
@@ -83,13 +87,28 @@ function UseInputs() {
     setActiveStep(0);
   };
 
+
+const addSkill = (skill)=>{
+  if(resumeDetails.userSkills.includes(skill)){
+  alert("THE GIVEN SKILL ALREADY ADDED , PLEASE ADD ANOTHER!!!")
+  }else{
+    setResumeDetails({...resumeDetails,userSkills:[...resumeDetails.userSkills,skill]})
+    // to clear add skill text box
+    skillRef.current.value = ""
+  }
+}
+
+const removeSkill = (skill)=>{
+  setResumeDetails({...resumeDetails,userSkills:resumeDetails.userSkills.filter(item,index)})
+}
+
   const renderSteps = (stepCount)=>{
     switch(stepCount){
         case 0 : return (
             <div>
                 <h3>Personal Details</h3>
                 <div className="d-flex row p-3">
-                    <TextField value={resumeDetails.username} onChange={e=>setResumeDetails({...resumeDetails,username:e.target.value})} id="standard-basic-name" label="Full Name" variant="standard" />
+                    <TextField value={resumeDetails.usename} onChange={e=>setResumeDetails({...resumeDetails,username:e.target.value})} id="standard-basic-name" label="Full Name" variant="standard" />
                     <TextField value={resumeDetails.jobTitle} onChange={e=>setResumeDetails({...resumeDetails,jobTitle:e.target.value})} id="standard-basic-job" label="Job Title" variant="standard" />
                     <TextField value={resumeDetails.location} onChange={e=>setResumeDetails({...resumeDetails,location:e.target.value})} id="standard-basic-location" label="Location" variant="standard" />
                 </div>
@@ -133,19 +152,25 @@ function UseInputs() {
             <div>
                 <h3>Skills</h3>
                 <div className="d-flex align-items-center justify-content-between p-3 w-100">
-                    <input placeholder='Add Skill' type="text" className="form-control" />
-                    <Button variant='text'>ADD</Button>
+                    <input ref={skillRef} placeholder='Add Skill' type="text" className="form-control" />
+                    <Button onClick={()=>addSkill(skillRef.current.value)} variant='text'>ADD</Button>
                 </div>
                 <h5>Suggestions</h5>
                 <div className="d-flex flex-wrap justify-content-between my-3">
                     {
-                        skillSuggestionArray.map((item,index)=>(<Button key={index} variant='outlined' className='m-2'>{item}</Button>
+                        skillSuggestionArray.map((item,index)=>(<Button onClick={()=>addSkill(item)} key={index} variant='outlined' className='m-2'>{item}</Button>
                         ))
                     }
                 </div>
                 <h5>Added Skills</h5>
                 <div className="d-flex flex-wrap justify-content-between my-3">
-                    <Button variant="contained">NODE JS <FaXmark className='ms-2 cursor-pointer' /></Button>
+                    {resumeDetails.userSkills?.length>0?
+                    resumeDetails.userSkills?.map((skill,index)=>(
+                      <Button key={index} variant="contained" className='m-1'>{skill}<FaXmark onClick={()=>removeSkill(skill)} className='ms-2'/> </Button>
+                    ))
+                  :
+                  <p className='fw-bolder'>No Skills are added yet !!!</p>
+                   }
                 </div>
             </div>
         )
