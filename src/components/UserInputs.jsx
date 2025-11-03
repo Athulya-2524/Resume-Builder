@@ -10,33 +10,34 @@ import { TextField } from '@mui/material';
 import { FaXmark } from "react-icons/fa6";
 import { resume } from 'react-dom/server';
 
+
 const steps = ['Basic Informations', 'Contact Details', 'Education Details','Work Experience','Skills & Certifications','Review & Submit'];
 
-function UserInputs() {
+function UserInputs({resumeDetails,setResumeDetails}) {
     const skillSuggestionArray = ['NODE JS','MONGODB','EXPRESS JS','REACT','ANGULAR','HTML','CSS','COMMUNICATION']
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
-    // create state for storing resume details
-    const [resumeDetails,setResumeDetails] = React.useState({
-      usename:"",
-      jobTitle:"",
-      location:"",
-      email:"",
-      mobile:"",
-      github:"",
-      linkedin:"",
-      portfolio:"",
-      course:"",
-      college:"",
-      university:"",
-      passoutYear:"",
-      jobType:"",
-      company:"",
-      cLocation:"",
-      duration:"",
-      userSkills:[],
-      summary:""
-    })
+    // create state for storing resume details=get from props
+    // const [resumeDetails,setResumeDetails] = React.useState({
+    //   username:"",
+    //   jobTitle:"",
+    //   location:"",
+    //   email:"",
+    //   mobile:"",
+    //   github:"",
+    //   linkedin:"",
+    //   portfolio:"",
+    //   course:"",
+    //   college:"",
+    //   university:"",
+    //   passoutYear:"",
+    //   jobType:"",
+    //   company:"",
+    //   cLocation:"",
+    //   duration:"",
+    //   userSkills:[],
+    //   summary:""
+    // })
 
     // reference to skill input tag
     const skillRef = React.useRef()
@@ -164,13 +165,12 @@ const removeSkill = (skill)=>{
                 </div>
                 <h5>Added Skills</h5>
                 <div className="d-flex flex-wrap justify-content-between my-3">
-                    {resumeDetails.userSkills?.length>0?
-                    resumeDetails.userSkills?.map((skill,index)=>(
-                      <Button key={index} variant="contained" className='m-1'>{skill}<FaXmark onClick={()=>removeSkill(skill)} className='ms-2'/> </Button>
-                    ))
+                 {
+                  resumeDetails.userSkills?.length>0?
+                  resumeDetails.userSkills?.map((skill,index)=>(<Button key={index} variant='contained' className='m-1'>{skill} <FaXmark onClick={()=>removeSkill(skill)} className='ms-2'/> </Button>))
                   :
-                  <p className='fw-bolder'>No Skills are added yet !!!</p>
-                   }
+                  <p className='fw-bolder'>No skills are added yet</p>
+                 }
                 </div>
             </div>
         )
@@ -253,4 +253,4 @@ const removeSkill = (skill)=>{
   );
 }
 
-export default UseInputs
+export default UserInputs
