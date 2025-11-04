@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { FaXmark } from "react-icons/fa6";
-import { resume } from 'react-dom/server';
+import { addResumeAPI } from "../services/allAPI";
 
 
 const steps = ['Basic Informations', 'Contact Details', 'Education Details','Work Experience','Skills & Certifications','Review & Submit'];
@@ -186,15 +186,25 @@ const removeSkill = (skill)=>{
     }
   }
 
-const handlleAddResume = async ()=>{
-  const {username,jobTitle,location} = resumeDetailsif(!username && !jobTitle && !location){
-    alert("Please fill the form completely..")
+const handleAddResume = async ()=>{
+  const {username,jobTitle,location} = resumeDetails
+  if(!username && !jobTitle && !location){
+    alert("please fill the form completely...")
   }else{
-    console.log("API Call");
+  // api
+  console.log("Api Call");
+  try{
+    const result = await addResumeAPI(resumeDetails)
+    console.log(result);
+    
+  }catch(error){
+    console.log(error);
     
   }
+  // succes redirect view page
+  }
+  
 }
-
 
 
   return (
@@ -250,9 +260,12 @@ const handlleAddResume = async ()=>{
                 Skip
               </Button>
             )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+            {activeStep === steps.length - 1 ? <Button onClick={handleAddResume}>Finish</Button> 
+            :
+             <Button onClick={handleNext}>Next</Button>
+             }
+            
+            
           </Box>
         </React.Fragment>
       )}
@@ -261,3 +274,7 @@ const handlleAddResume = async ()=>{
 }
 
 export default UserInputs
+
+
+
+
