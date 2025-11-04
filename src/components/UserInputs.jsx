@@ -186,7 +186,14 @@ const removeSkill = (skill)=>{
     }
   }
 
-
+const handlleAddResume = async ()=>{
+  const {username,jobTitle,location} = resumeDetailsif(!username && !jobTitle && !location){
+    alert("Please fill the form completely..")
+  }else{
+    console.log("API Call");
+    
+  }
+}
 
 
 
