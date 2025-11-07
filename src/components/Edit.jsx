@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import { FaXmark } from "react-icons/fa6";
+import { updateResumeAPI } from '../services/allAPI';
 
 
 const style = {
@@ -41,6 +42,26 @@ function Edit({resumeDetails,setResumeDetails}) {
 
 const removeSkill = (skill)=>{
   setResumeDetails({...resumeDetails,userSkills:resumeDetails.userSkills.filter(item,index)})
+}
+
+const handleResumeUpdate = async ()=>{
+  const {id,username,jobTitle,location} = resumeDetails
+  if(!username && !jobTitle && !location){
+    alert("Please fill the form Completely...")
+  }else{
+    // api
+    console.log("API call");
+    try{
+      const result = await updateResumeAPI(id,resumeDetails)
+      console.log(result);
+      if(result.status==200){
+        alert("Resume updated successfully!!!")
+        handleClose()
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
 }
 
     return (
